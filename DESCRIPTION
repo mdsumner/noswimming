@@ -13,3 +13,5 @@ RoxygenNote: 7.3.1
 Imports: 
     leastcostpath,
     terra
+URL: https://github.com/mdsumner/noswimming
+BugReports: https://github.com/mdsumner/noswimming/issues
