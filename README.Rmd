@@ -1,0 +1,67 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# noswimming
+
+<!-- badges: start -->
+<!-- badges: end -->
+
+The goal of noswimming is to prevent animals from leaving the ocean. (i.e. no swimming on land is allowed)
+
+## WIP
+
+The name isn't very serious, or accurate, or what we want. TBD 
+
+## Installation
+
+You can install the development version of noswimming like so:
+
+``` r
+# FILL THIS IN! HOW CAN PEOPLE INSTALL YOUR DEV PACKAGE?
+```
+
+## Example
+
+This is a basic example which finds the least cost path around land (we get a topographic dataset under the hood to figure this out). 
+
+```{r example}
+library(noswimming)
+#pt <- cbind(c(-90, 90), c(-70, -60))
+pt <- cbind(c(138, 153),  c(-36, -23))
+path <- lcp(pt)
+
+library(terra)
+## we get the data in the projection use
+plot(path)
+## so reproject for longlat use
+plot(terra::project(path, "EPSG:4326"), lty = 2, col = "firebrick")
+maps::map(add = TRUE)
+```
+
+We can also obtain the intermediate datasets used in the above process. 
+
+```{r intermediate}
+
+topo <- make_global_topo(pt)
+
+## here we might customize the min and max value of the topography (from [-Inf,0])
+surf <- make_na_surface(topo)
+
+path <- lcp(pt, surf = surf)
+```
+
+## Code of Conduct
+  
+Please note that the noswimming project is released with a [Contributor Code of Conduct](https://contributor-covenant.org/version/2/1/CODE_OF_CONDUCT.html). By contributing to this project, you agree to abide by its terms.
